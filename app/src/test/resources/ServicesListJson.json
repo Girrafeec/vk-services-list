@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "name": "ВКонтакте",
+      "description": "Самая популярная соцсеть и первое суперприложение в Роcсии",
+      "icon_url": "https://mobile-olympiad-trajectory.hb.bizmrg.com/logo-vk.png",
+      "service_url": "https://vk.com/"
+    },{
+      "name": "Одноклассники",
+      "description": "Первая соцсеть в России, развлекательная платформа с играми, видео и музыкой",
+      "icon_url": "https://mobile-olympiad-trajectory.hb.bizmrg.com/logo-ok.png",
+      "service_url": "https://ok.ru/"
+    }
+  ]
+}

@@ -25,6 +25,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "API_BASE_URL", "\"https://mobile-olympiad-trajectory.hb.bizmrg.com/\"")
+        }
+        debug {
+            buildConfigField("String", "API_BASE_URL", "\"https://mobile-olympiad-trajectory.hb.bizmrg.com/\"")
         }
     }
     compileOptions {
@@ -49,6 +53,10 @@ dependencies {
 
     // Unit-tests
     testImplementation(Dependencies.jUnit.jUnit)
+    testImplementation(Dependencies.OkHttp3.mockWebServer)
+    testImplementation(Dependencies.Coroutines.coroutinesTest)
+    testImplementation(Dependencies.Mockito.mockitoKotlin)
+    testImplementation(Dependencies.Mockito.mockitoInline)
 
     // ConstraintLayout
     implementation(Dependencies.AndroidX.ConstraintLayout.constraintLayout)

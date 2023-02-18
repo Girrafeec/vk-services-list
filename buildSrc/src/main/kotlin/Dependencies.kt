@@ -10,10 +10,6 @@ class Dependencies {
             const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.jetpackLifecycleVersion}"
         }
 
-        object LifecycleService {
-            const val lifecycleService = "androidx.lifecycle:lifecycle-service:${Versions.jetpackLifecycleVersion}"
-        }
-
         object Navigation {
             const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.jetpackNavigationComponentVersion}"
             const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.jetpackNavigationComponentVersion}"
