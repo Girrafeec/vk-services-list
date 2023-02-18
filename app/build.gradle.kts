@@ -3,10 +3,11 @@ plugins {
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
     id(Plugins.safeArgs)
+    id(Plugins.kotlinParcelize)
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 32
 
     defaultConfig {
         applicationId = "com.girrafeecstud.vk_services_list"
@@ -85,4 +86,9 @@ dependencies {
 
     // Coroutines
     implementation(Dependencies.Coroutines.coroutines)
+
+    // Picasso
+    implementation(Dependencies.Picasso.picasso)
+
+    implementation(project(":navigation"))
 }

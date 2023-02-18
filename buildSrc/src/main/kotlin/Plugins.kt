@@ -14,4 +14,6 @@ object Plugins {
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
 
     const val navigationSafeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationSafeArgsPluginVersion}"
+
+    const val kotlinParcelize = "kotlin-parcelize"
 }

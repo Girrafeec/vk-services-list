@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "vk-services-list"
 include(":app")
+include(":navigation")

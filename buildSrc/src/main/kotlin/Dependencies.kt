@@ -72,4 +72,8 @@ class Dependencies {
         const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp3Version}"
     }
 
+    object Picasso {
+        const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+    }
+
 }

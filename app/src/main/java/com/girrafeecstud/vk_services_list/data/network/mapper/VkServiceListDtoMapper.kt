@@ -4,8 +4,9 @@ import com.girrafeecstud.vk_services_list.base.ListMapper
 import com.girrafeecstud.vk_services_list.data.network.dto.VkServiceDto
 import com.girrafeecstud.vk_services_list.data.network.dto.VkServiceListDto
 import com.girrafeecstud.vk_services_list.domain.entity.VkService
+import javax.inject.Inject
 
-class VkServiceListDtoMapper : ListMapper<VkServiceDto, VkService> {
+class VkServiceListDtoMapper @Inject constructor() : ListMapper<VkServiceDto, VkService> {
     override fun map(input: List<VkServiceDto>): List<VkService> =
         input.map { dto ->
             VkService(

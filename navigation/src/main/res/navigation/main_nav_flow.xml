@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_flow"
+    app:startDestination="@id/services_flow">
+
+    <include
+        app:graph="@navigation/services_flow"/>
+
+    <action
+        android:id="@+id/action_global_services_flow"
+        app:destination="@id/services_flow"
+        app:popUpTo="@id/main_nav_flow"/>
+
+    <fragment
+        android:id="@+id/services_flow"
+        android:name="com.girrafeecstud.vk_services_list.ui.ServicesFlowFragment"/>
+
+</navigation>

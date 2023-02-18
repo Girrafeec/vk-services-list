@@ -13,7 +13,7 @@ object Versions {
     const val materialVersion = "1.6.1"
 
     // AppCompat
-    const val appCompatVersion = "1.6.1"
+    const val appCompatVersion = "1.5.1"
 
     // Core
     const val coreKtxVersion = "1.8.0"
@@ -41,5 +41,7 @@ object Versions {
     const val retrofitVersion = "2.9.0"
 
     const val okHttp3Version = "4.10.0"
+
+    const val picasso = "2.8"
 
 }
