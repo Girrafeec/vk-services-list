@@ -1,11 +1,15 @@
 package com.girrafeecstud.vk_services_list.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.navArgs
+import androidx.transition.TransitionInflater
 import com.girrafeecstud.vk_services_list.databinding.ServiceDetailsFragmentBinding
 import com.girrafeecstud.vk_services_list.navigation.ServicesFlowDestination
 import com.girrafeecstud.vk_services_list.navigation.ToServiceScreenNavigable
@@ -40,6 +44,9 @@ class ServiceDetailsFragment : BaseFragment() {
     }
 
     override fun setListeners() {
+
+        binding.serviceLinkBtn.setOnClickListener { openUrl(url = args.serviceDetails.serviceUrl) }
+
         val backPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 (parentFragment?.parentFragment as ToServiceScreenNavigable)
@@ -55,7 +62,11 @@ class ServiceDetailsFragment : BaseFragment() {
             binding.serviceName.text = service.serviceName
             binding.serviceDescription.text = service.serviceDescription
             binding.serviceImage.loadAndSetImage(url = service.serviceIconUrl)
-            //TODO what to do with url?
         }
+    }
+
+    private fun openUrl(url: String) {
+        val uri = Uri.parse(url)
+        startActivity(Intent(Intent.ACTION_VIEW, uri))
     }
 }

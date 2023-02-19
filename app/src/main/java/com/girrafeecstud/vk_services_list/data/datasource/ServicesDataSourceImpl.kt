@@ -1,6 +1,7 @@
 package com.girrafeecstud.vk_services_list.data.datasource
 
 import com.girrafeecstud.vk_services_list.base.ExceptionType
+import com.girrafeecstud.vk_services_list.base.NoNetworkConnectionException
 import com.girrafeecstud.vk_services_list.data.network.api.ServicesApi
 import com.girrafeecstud.vk_services_list.data.network.mapper.VkServiceListDtoMapper
 import com.girrafeecstud.vk_services_list.domain.base.BusinessErrorType
@@ -32,7 +33,10 @@ class ServicesDataSourceImpl @Inject constructor(
                     return@flow
                 }
                 emit(BusinessResult.Error(errorType = BusinessErrorType.WRONG_DATA))
-            } catch (e: SocketTimeoutException) {
+            } catch (e: NoNetworkConnectionException) {
+                emit(BusinessResult.Exception(exceptionType = ExceptionType.NO_INTERNET_CONNECTION))
+            }
+            catch (e: SocketTimeoutException) {
                 emit(BusinessResult.Exception(exceptionType = ExceptionType.INTERNET_CONNECTION_TIMEOUT))
             } catch (exception: IOException) {
                 exception.printStackTrace()

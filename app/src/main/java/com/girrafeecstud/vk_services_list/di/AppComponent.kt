@@ -9,7 +9,8 @@ import javax.inject.Singleton
     modules = [
         NetworkModule::class,
         AppModule::class
-    ]
+    ],
+    dependencies = [AppDependencies::class]
 )
 interface AppComponent {
 
@@ -17,6 +18,8 @@ interface AppComponent {
 
     @Component.Builder
     interface Builder {
+
+        fun dependencies(dependencies: AppDependencies): Builder
 
         fun build(): AppComponent
 
@@ -27,10 +30,11 @@ interface AppComponent {
 
         val appComponent get() = _appComponent!!
 
-        fun init() {
+        fun init(dependencies: AppDependencies) {
             if (_appComponent == null) {
                 _appComponent = DaggerAppComponent
                     .builder()
+                    .dependencies(dependencies)
                     .build()
             }
         }

@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.girrafeecstud.vk_services_list.databinding.ServicesFragmentBinding
 import com.girrafeecstud.vk_services_list.di.AppComponent
@@ -16,6 +20,7 @@ import com.girrafeecstud.vk_services_list.domain.entity.VkService
 import com.girrafeecstud.vk_services_list.navigation.ServicesFlowDestination
 import com.girrafeecstud.vk_services_list.navigation.ToServiceScreenNavigable
 import com.girrafeecstud.vk_services_list.presentation.ServicesViewModel
+import com.girrafeecstud.vk_services_list.presentation.UiState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -55,6 +60,22 @@ class ServicesFragment :
     }
 
     override fun registerObservers() {
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                servicesViewModel.state
+                    .onEach { state ->
+                        when (state) {
+                            is UiState.IsLoading -> {
+                                handleLoading(isLoading = state.isLoading)
+                            }
+                            is UiState.Error -> {}
+                        }
+                    }
+                    .launchIn(lifecycleScope)
+            }
+        }
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 servicesViewModel.services
@@ -65,8 +86,12 @@ class ServicesFragment :
                                     servicesAdapter.refreshServices(services = services)
                                 }
                             }
-                            is BusinessResult.Error -> {}
-                            is BusinessResult.Exception -> {}
+                            is BusinessResult.Error -> {
+                                Toast.makeText(requireActivity().applicationContext, result.errorType.name, Toast.LENGTH_SHORT).show()
+                            }
+                            is BusinessResult.Exception -> {
+                                Toast.makeText(requireActivity().applicationContext, result.exceptionType.name, Toast.LENGTH_SHORT).show()
+                            }
                         }
 
                     }
@@ -76,14 +101,23 @@ class ServicesFragment :
     }
 
     override fun handleLoading(isLoading: Boolean) {
-        super.handleLoading(isLoading)
+        when (isLoading) {
+            true -> {
+                binding.servicesRecView.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+            }
+            false -> {
+                binding.servicesRecView.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
+        }
     }
 
     override fun handleError(any: Any?) {
-        super.handleError(any)
+
     }
 
-    override fun onServiceItemClickListener(service: VkService) {
+    override fun onServiceItemClickListener(service: VkService, serviceImage: View) {
         (parentFragment?.parentFragment as ToServiceScreenNavigable)
             .navigateToScreen(destination = ServicesFlowDestination.ServiceDetailsFragment(serviceDetails = service))
     }

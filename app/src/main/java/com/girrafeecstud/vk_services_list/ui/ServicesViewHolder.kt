@@ -1,5 +1,6 @@
 package com.girrafeecstud.vk_services_list.ui
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.girrafeecstud.vk_services_list.databinding.ServiceItemBinding
 import com.girrafeecstud.vk_services_list.domain.entity.VkService
@@ -14,7 +15,7 @@ class ServicesViewHolder(
         binding.serviceName.text = service.serviceName
 
         binding.serviceItem.setOnClickListener {
-            listener.onServiceItemClickListener(service = service)
+            listener.onServiceItemClickListener(service = service, serviceImage = binding.serviceImage)
         }
     }
 
@@ -23,7 +24,7 @@ class ServicesViewHolder(
     }
 
     interface OnServiceItemClickListener {
-        fun onServiceItemClickListener(service: VkService)
+        fun onServiceItemClickListener(service: VkService, serviceImage: View)
     }
 
 }
